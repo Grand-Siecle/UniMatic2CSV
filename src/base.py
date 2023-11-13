@@ -24,7 +24,6 @@ class SRU(object):
             perfect_match (boolean): True if request was completed with Gallica ark / directory basename
         """
         print("|        requesting data from BnF's SRU API")
-        url = f'https://catalogue.bnf.fr/api/SRU?version=1.2&operation=searchRetrieve&query=aut.persistentid%20all%20%20"{self.ark}"'
         r = requests.get(
             f'https://catalogue.bnf.fr/api/SRU?version=1.2&operation=searchRetrieve&query=aut.persistentid%20all%20%20"{self.ark}"')
         root = etree.fromstring(r.content)
@@ -34,4 +33,4 @@ class SRU(object):
         else:
             perfect_match = True
             print(f"|        \33[32mfound digitised document in BnF catalogue\x1b[0m")
-        return url, root, perfect_match
+        return root, perfect_match

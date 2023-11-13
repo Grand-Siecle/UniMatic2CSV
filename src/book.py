@@ -25,20 +25,20 @@ class Book(SRU):
         # create and set defaults for author data
         fields = ["isni", "primary_name", "secondary_name", "namelink", "xmlid"]
         data = {}
-        {data.setdefault(f, None) for f in fields}
+        data = {data.setdefault(f, None) for f in fields}
 
         # -- identifier (700s subfield "o") --
-        has_isni = author_element.find('m:subfield[@code="o"]', namespaces=NS)
+        has_isni = author_element.find('m:subfield[@code="o"]', namespaces=self.NS)
         if has_isni is not None and has_isni.text[0:4] == "ISNI":
             data["isni"] = has_isni.text[4:]
 
         # -- primary name (700s subfield "a") --
-        has_primaryname = author_element.find('m:subfield[@code="a"]', namespaces=NS)
+        has_primaryname = author_element.find('m:subfield[@code="a"]', namespaces=self.NS)
         if has_primaryname is not None:
             data["primary_name"] = has_primaryname.text
 
         # -- secondary name (700s subfield "b") --
-        has_secondaryname = author_element.find('m:subfield[@code="b"]', namespaces=NS)
+        has_secondaryname = author_element.find('m:subfield[@code="b"]', namespaces=self.NS)
         if has_secondaryname is not None:
             x = re.search(r"(?:van der)|(?:de la)|(?:de)|(?:du)|(?:von)|(?:van)", has_secondaryname.text)
             if x:
