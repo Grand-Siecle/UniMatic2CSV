@@ -9,7 +9,8 @@ from src.opt.tools import check_ark
 @click.argument("ark", type=str, callback=check_ark)
 def run(ark):
     person = Person(ark)
-    person.basic_data()
+    id_person = person.id_data()
+    lifeTime_person = person.life_data()
 
 
 if __name__ == '__main__':
