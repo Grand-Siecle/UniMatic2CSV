@@ -1,3 +1,9 @@
+# -----------------------------------------------------------
+# Code inspired by: Kelly Christensen
+# Repository: https://github.com/kat-kel/alto2tei.git
+# Python class to parse and store data from the BNF's general catalogue.
+# -----------------------------------------------------------
+
 import numpy as np
 from lxml import etree
 from typing import Dict
@@ -10,7 +16,7 @@ from src.opt.tools import get_geonames_id
 class Person(SRU):
     def __init__(self, ark):
         super().__init__(ark)
-        self.root, self.perfect_match = self.request()
+        self.root, self.perfect_match = self.request(mode='PERS')
 
     def id_data(self) -> Dict:
         fields = ["ISNI"]

@@ -17,15 +17,24 @@ class SRU(object):
             ark (string): document ARK in BnF catalogue"""
         self.ark = ark
 
-    def request(self):
+    def request(self, mode: str):
         """Request metadata from the BnF's SRU API.
+
+        mode :
         Returns:
             root (etree_Element): parsed XML tree of requested Unimarc data
             perfect_match (boolean): True if request was completed with Gallica ark / directory basename
         """
-        print("|        requesting data from BnF's SRU API")
-        r = requests.get(
+
+        if mode == 'PERS':
+            r = requests.get(
             f'https://catalogue.bnf.fr/api/SRU?version=1.2&operation=searchRetrieve&query=aut.persistentid%20all%20%20"{self.ark}"')
+        elif mode == 'BOOK':
+            r = requests.get(
+                f'https://catalogue.bnf.fr/api/SRU?version=1.2&operation=searchRetrieve&query=bib.persistentid%20all%20%20"{self.ark}"')
+        else:
+            raise ValueError('Verify mode value error')
+
         root = etree.fromstring(r.content)
         if root.find('.//s:numberOfRecords', namespaces=self.NS).text == "0":
             perfect_match = False
