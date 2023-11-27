@@ -14,20 +14,70 @@ from src.opt.tools import get_geonames_id
 
 
 class Book(SRU):
+
     def __init__(self, ark):
         super().__init__(ark)
         self.root, self.perfect_match = self.request(mode='BOOK')
 
-    def id_data(self) -> Dict:
+    def id_author(self) -> Dict:
         fields = ["ISNI"]
 
         data = {}
         {data.setdefault(f, np.NAN) for f in fields}
 
-        id_element = self.root.find('.//m:datafield[@tag="010"]', namespaces=self.NS)
+        id_element = self.root.find('.//m:datafield[@tag="700"]', namespaces=self.NS)
 
-        # -- identifier (010s subfield "a") --
-        has_isni = id_element.find('m:subfield[@code="a"]', namespaces=self.NS)
+        # -- identifier (700 subfield "o") --
+        has_isni = id_element.find('m:subfield[@code="o"]', namespaces=self.NS)
         if has_isni is not None:
-            data["ISNI"] = has_isni.text.strip()
+            data["ISNI"] = has_isni.text.strip().replace('ISNI', '')
+        return data
+
+    def get_title(self) -> Dict:
+        fields = ["Titre_long"]
+
+        data = {}
+        {data.setdefault(f, np.NAN) for f in fields}
+
+        id_element = self.root.find('.//m:datafield[@tag="200"]', namespaces=self.NS)
+
+        # -- identifier (700 subfield "o") --
+        has_title = id_element.find('m:subfield[@code="a"]', namespaces=self.NS)
+        if has_title is not None:
+            data["Titre_long"] = has_title.text.strip()
+        return data
+
+    def get_publication(self) -> Dict:
+        fields = ["ID_Lieu_publication", "Lieu_publication", "Date"]
+
+        data = {}
+        {data.setdefault(f, np.NAN) for f in fields}
+
+        id_element = self.root.find('.//m:datafield[@tag="210"]', namespaces=self.NS)
+
+        # -- identifier (700 subfield "o") --
+        has_place = id_element.find('m:subfield[@code="a"]', namespaces=self.NS).text.strip()
+        has_placeId = get_geonames_id(has_place)
+
+        has_date = id_element.find('m:subfield[@code="d"]', namespaces=self.NS).text.strip()
+        if has_place is not None:
+            data["ID_Lieu_publication"] = has_place.text.strip()
+        if has_place is not None:
+            data["Lieu_publication"] = has_placeId.text.strip()
+        if has_date is not None:
+            data["Date"] = has_date.text.strip()
+        return data
+
+    def get_matiere(self) -> Dict:
+        fields = ["Titre_long"]
+
+        data = {}
+        {data.setdefault(f, np.NAN) for f in fields}
+
+        id_element = self.root.find('.//m:datafield[@tag="200"]', namespaces=self.NS)
+
+        # -- identifier (700 subfield "o") --
+        has_title = id_element.find('m:subfield[@code="a"]', namespaces=self.NS)
+        if has_title is not None:
+            data["Titre_long"] = has_title.text.strip()
         return data
