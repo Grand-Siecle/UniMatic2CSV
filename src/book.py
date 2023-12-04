@@ -25,12 +25,15 @@ class Book(SRU):
         data = {}
         {data.setdefault(f, np.NAN) for f in fields}
 
-        id_element = self.root.find('.//m:datafield[@tag="700"]', namespaces=self.NS)
+        ids_isni = self.root.findall('.//m:datafield[@tag="700"]', namespaces=self.NS)
 
         # -- identifier (700 subfield "o") --
-        has_isni = id_element.find('m:subfield[@code="o"]', namespaces=self.NS)
-        if has_isni is not None:
-            data["ISNI"] = has_isni.text.strip().replace('ISNI', '')
+        list_isni = []
+        for id_isni in ids_isni:
+            id_isni = id_isni.find('m:subfield[@code="o"]', namespaces=self.NS)
+            list_isni.append(id_isni.text.strip().replace('ISNI', ''))
+        if len(list_isni) > 0:
+            data["ISNI"] = ' | '.join(list_isni)
         return data
 
     def get_title(self) -> Dict:
@@ -61,11 +64,12 @@ class Book(SRU):
 
         has_date = id_element.find('m:subfield[@code="d"]', namespaces=self.NS).text.strip()
         if has_place is not None:
-            data["ID_Lieu_publication"] = has_place.text.strip()
+            data["ID_Lieu_publication"] = has_place
         if has_place is not None:
-            data["Lieu_publication"] = has_placeId.text.strip()
+            data["Lieu_publication"] = has_placeId
         if has_date is not None:
-            data["Date"] = has_date.text.strip()
+            has_date = datetime.strptime(has_date, "%Y%m%d").strftime("%Y/%m/%d")
+            data["Date"] = has_date
         return data
 
     def get_matiere(self) -> Dict:
@@ -74,10 +78,13 @@ class Book(SRU):
         data = {}
         {data.setdefault(f, np.NAN) for f in fields}
 
-        id_element = self.root.find('.//m:datafield[@tag="200"]', namespaces=self.NS)
+        ids_rameau = self.root.findall('.//m:datafield[@tag="606"]', namespaces=self.NS)
 
         # -- identifier (700 subfield "o") --
-        has_title = id_element.find('m:subfield[@code="a"]', namespaces=self.NS)
-        if has_title is not None:
-            data["Titre_long"] = has_title.text.strip()
+        list_rameau = []
+        for id_rameau in ids_rameau:
+            id_rameau = id_rameau.find('m:subfield[@code="3"]', namespaces=self.NS)
+            list_rameau.append(id_rameau.text.strip())
+        if len(list_rameau) > 0:
+            data["Titre_long"] = ' | '.join(list_rameau)
         return data
