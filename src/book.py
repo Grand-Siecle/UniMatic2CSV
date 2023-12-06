@@ -37,7 +37,7 @@ class Book(SRU):
         return data
 
     def get_title(self) -> Dict:
-        fields = ["Titre_long"]
+        fields = ["Titre_long", "Format"]
 
         data = {}
         {data.setdefault(f, np.NAN) for f in fields}
@@ -46,8 +46,13 @@ class Book(SRU):
 
         # -- identifier (700 subfield "o") --
         has_title = id_element.find('m:subfield[@code="a"]', namespaces=self.NS)
+
+        id_element = self.root.find('.//m:datafield[@tag="215"]', namespaces=self.NS)
+        has_format = id_element.find('m:subfield[@code="d"]', namespaces=self.NS)
         if has_title is not None:
             data["Titre_long"] = has_title.text.strip()
+        if has_format is not None:
+            data["Format"] = has_format.text.strip()
         return data
 
     def get_publication(self) -> Dict:
@@ -73,18 +78,28 @@ class Book(SRU):
         return data
 
     def get_matiere(self) -> Dict:
-        fields = ["Titre_long"]
+        fields = ["Sujet", "Cote"]
 
         data = {}
         {data.setdefault(f, np.NAN) for f in fields}
 
-        ids_rameau = self.root.findall('.//m:datafield[@tag="606"]', namespaces=self.NS)
+        ids_element = self.root.findall('.//m:datafield[@tag="606"]', namespaces=self.NS)
 
-        # -- identifier (700 subfield "o") --
+        # -- identifier (606 subfield "o") --
         list_rameau = []
-        for id_rameau in ids_rameau:
-            id_rameau = id_rameau.find('m:subfield[@code="3"]', namespaces=self.NS)
-            list_rameau.append(id_rameau.text.strip())
+        for id_element in ids_element:
+            for letter in ['a', 'x', 'y', 'z']:
+                try:
+                    label_rameau = id_element.find(f'm:subfield[@code="{letter}"]', namespaces=self.NS)
+                    list_rameau.append(label_rameau.text.strip())
+                except AttributeError:
+                    pass #Nonetype
         if len(list_rameau) > 0:
-            data["Titre_long"] = ' | '.join(list_rameau)
+            data["Sujet"] = ' | '.join(list_rameau)
+
+        # Cote
+        id_element = self.root.find('.//m:datafield[@tag="930"]', namespaces=self.NS) # get only first ref
+        has_cote = id_element.find('m:subfield[@code="a"]', namespaces=self.NS)
+        if has_cote is not None:
+            data["Cote"] = has_cote.text.strip()
         return data

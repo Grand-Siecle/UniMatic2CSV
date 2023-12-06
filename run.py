@@ -9,7 +9,9 @@ from src.opt.tools import check_ark
 @click.argument("ark", type=str, callback=check_ark)
 def run(ark):
     book = Book(ark)
+    book.get_title()
     lifeTime_person = book.get_matiere()
+    print(lifeTime_person)
 
 
 if __name__ == '__main__':
