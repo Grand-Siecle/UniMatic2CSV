@@ -74,7 +74,7 @@ class Book(SRU):
             data["Lieu_publication"] = has_placeId
         if has_date is not None:
             has_date = datetime.strptime(has_date, "%Y%m%d").strftime("%Y/%m/%d")
-            data["Date"] = has_date
+            data["Date_01"] = has_date
         return data
 
     def get_matiere(self) -> Dict:
