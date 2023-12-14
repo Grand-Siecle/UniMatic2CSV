@@ -27,7 +27,10 @@ class Person(SRU):
         id_element = self.root.find('.//m:datafield[@tag="010"]', namespaces=self.NS)
 
         # -- identifier (010s subfield "a") --
-        has_isni = id_element.find('m:subfield[@code="a"]', namespaces=self.NS)
+        if id_element is not None:
+            has_isni = id_element.find('m:subfield[@code="a"]', namespaces=self.NS)
+        else:
+            has_isni = None
         if has_isni is not None:
             data["ISNI"] = has_isni.text.strip()
         return data
@@ -40,18 +43,30 @@ class Person(SRU):
 
         # -- dates (103) --
         date_element = self.root.find('.//m:datafield[@tag="103"]', namespaces=self.NS)
-
-        has_dates = date_element.find('m:subfield[@code="a"]', namespaces=self.NS).text.strip().split('  ')
-        has_dateBirth, has_dateDeath = datetime.strptime(has_dates[0], "%Y%m%d").strftime("%Y/%m/%d"), datetime.strptime(has_dates[1], "%Y%m%d").strftime("%Y/%m/%d")
+        if date_element is not None:
+            has_dates = date_element.find('m:subfield[@code="a"]', namespaces=self.NS).text.strip().split('  ')
+            try:
+                has_dateBirth = datetime.strptime(has_dates[0], "%Y%m%d").strftime("%Y/%m/%d")
+            except:
+                has_dateBirth = None
+            try:
+                has_dateDeath = datetime.strptime(has_dates[1], "%Y%m%d").strftime("%Y/%m/%d")
+            except:
+                has_dateDeath = None
+        else:
+            has_dateBirth, has_dateDeath = None, None
 
         # -- places (301) --
         place_element = self.root.find('.//m:datafield[@tag="301"]', namespaces=self.NS)
 
-        has_placeBirth = place_element.find('m:subfield[@code="a"]', namespaces=self.NS).text.strip()
-        has_placeBirthId = get_geonames_id(has_placeBirth)
+        if place_element is not None:
+            has_placeBirth = place_element.find('m:subfield[@code="a"]', namespaces=self.NS).text.strip()
+            has_placeBirthId = get_geonames_id(has_placeBirth)
 
-        has_placeDeath = place_element.find('m:subfield[@code="b"]', namespaces=self.NS).text.strip()
-        has_placeDeathId = get_geonames_id(has_placeDeath)
+            has_placeDeath = place_element.find('m:subfield[@code="b"]', namespaces=self.NS).text.strip()
+            has_placeDeathId = get_geonames_id(has_placeDeath)
+        else:
+            has_placeBirth, has_placeBirthId, has_placeDeath, has_placeDeathId = None, None, None, None
 
         if has_dateBirth is not None:
             data["Annee_naissance"] = has_dateBirth
@@ -75,14 +90,7 @@ class Person(SRU):
 
         # -- activités (300) --
         activity = self.root.find('.//m:datafield[@tag="300"]', namespaces=self.NS)
-        has_job = activity.find('m:subfield[@code="a"]', namespaces=self.NS).text.strip()
-
+        has_job = activity.find('m:subfield[@code="a"]', namespaces=self.NS).text.strip() if activity is not None else None
         if has_job is not None:
             data["Professions"] = has_job
         return data
-
-
-
-
-
-

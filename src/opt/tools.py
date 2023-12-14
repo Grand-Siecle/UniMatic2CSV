@@ -5,7 +5,7 @@ import os
 from src.opt.variables import ARK
 
 
-def check_ark(ctx, param, ark):
+def check_ark(ark):
     """Checks the validity of a ARK id with regex for a CLI argument"""
 
     regex = ARK
@@ -50,12 +50,10 @@ def get_geonames_id(location_name):
         # Effectuer la requête
         response = requests.get(base_url, params=params)
         data = response.json()
-        print(data)
 
         # Extraire l'ID du premier résultat (si disponible)
-        #geonames_id = data['geonames'][0]['geonameId'] if 'geonames' in data and data['geonames'] else None
-
-        #return geonames_id
+        geonames_id = data['geonames'][0]['toponymName'] if 'geonames' in data and data['geonames'] else None
+        return geonames_id
 
     except requests.RequestException as e:
         return None
