@@ -48,11 +48,11 @@ class Person(SRU):
             try:
                 has_dateBirth = datetime.strptime(has_dates[0], "%Y%m%d").strftime("%Y/%m/%d")
             except:
-                has_dateBirth = None
+                has_dateBirth = has_dates[0]
             try:
                 has_dateDeath = datetime.strptime(has_dates[1], "%Y%m%d").strftime("%Y/%m/%d")
             except:
-                has_dateDeath = None
+                has_dateDeath = has_dates[1]
         else:
             has_dateBirth, has_dateDeath = None, None
 

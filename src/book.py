@@ -42,13 +42,13 @@ class Book(SRU):
         data = {}
         {data.setdefault(f, np.NAN) for f in fields}
 
-        id_element = self.root.find('.//m:datafield[@tag="200"]', namespaces=self.NS)
+        title_element = self.root.find('.//m:datafield[@tag="200"]', namespaces=self.NS)
 
         # -- identifier (700 subfield "o") --
-        has_title = id_element.find('m:subfield[@code="a"]', namespaces=self.NS)
+        has_title = title_element.find('m:subfield[@code="a"]', namespaces=self.NS) if title_element is not None else None
 
-        id_element = self.root.find('.//m:datafield[@tag="215"]', namespaces=self.NS)
-        has_format = id_element.find('m:subfield[@code="d"]', namespaces=self.NS)
+        format_element = self.root.find('.//m:datafield[@tag="215"]', namespaces=self.NS)
+        has_format = format_element.find('m:subfield[@code="d"]', namespaces=self.NS) if format_element is not None else None
         if has_title is not None:
             data["Titre_long"] = has_title.text.strip()
         if has_format is not None:
@@ -56,7 +56,7 @@ class Book(SRU):
         return data
 
     def get_publication(self) -> Dict:
-        fields = ["ID_Lieu_publication", "Lieu_publication", "Date"]
+        fields = ["ID_Lieu_publication", "Lieu_publication", "Date_01"]
 
         data = {}
         {data.setdefault(f, np.NAN) for f in fields}
@@ -64,17 +64,20 @@ class Book(SRU):
         id_element = self.root.find('.//m:datafield[@tag="210"]', namespaces=self.NS)
 
         # -- identifier (700 subfield "o") --
-        has_place = id_element.find('m:subfield[@code="a"]', namespaces=self.NS).text.strip()
+        has_place = id_element.find('m:subfield[@code="a"]', namespaces=self.NS).text.strip() if id_element is not None else None
         has_placeId = get_geonames_id(has_place)
 
-        has_date = id_element.find('m:subfield[@code="d"]', namespaces=self.NS).text.strip()
+        has_date = id_element.find('m:subfield[@code="d"]', namespaces=self.NS).text.strip() if id_element is not None else None
         if has_place is not None:
-            data["ID_Lieu_publication"] = has_place
+            data["ID_Lieu_publication"] = has_placeId
         if has_place is not None:
-            data["Lieu_publication"] = has_placeId
+            data["Lieu_publication"] = has_place
         if has_date is not None:
-            has_date = datetime.strptime(has_date, "%Y%m%d").strftime("%Y/%m/%d")
-            data["Date_01"] = has_date
+            try:
+                has_date = datetime.strptime(has_date, "%Y%m%d").strftime("%Y/%m/%d")
+                data["Date_01"] = has_date
+            except:
+                data["Date_01"] = has_date
         return data
 
     def get_matiere(self) -> Dict:
@@ -98,8 +101,8 @@ class Book(SRU):
             data["Sujet"] = ' | '.join(list_rameau)
 
         # Cote
-        id_element = self.root.find('.//m:datafield[@tag="930"]', namespaces=self.NS) # get only first ref
-        has_cote = id_element.find('m:subfield[@code="a"]', namespaces=self.NS)
+        cote_element = self.root.find('.//m:datafield[@tag="930"]', namespaces=self.NS) # get only first ref
+        has_cote = cote_element.find('m:subfield[@code="a"]', namespaces=self.NS) if cote_element is not None else None
         if has_cote is not None:
             data["Cote"] = has_cote.text.strip()
         return data
