@@ -52,7 +52,7 @@ def get_geonames_id(location_name):
         data = response.json()
 
         # Extraire l'ID du premier résultat (si disponible)
-        geonames_id = data['geonames'][0]['toponymName'] if 'geonames' in data and data['geonames'] else None
+        geonames_id = data['geonames'][0]['geonameId'] if 'geonames' in data and data['geonames'] else None
         return geonames_id
 
     except requests.RequestException as e:
