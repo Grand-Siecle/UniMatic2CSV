@@ -47,7 +47,7 @@ def run(filename: str, objet: str, header: int):
                     raise ValueError('You need to define the csv object')
                 # Replace null or NaN values in the row
                 for key, value in dict_fusion.items():
-                    if pd.notna(df.at[index, key]):  # Check if the cell is not empty
+                    if pd.isna(df.at[index, key]):  # Check if the cell is not empty
                         df.at[index, key] = value
             else:
                 click.echo(f'\033[31mImpossible to parse row with ark : {str(index)}\x1b[31m')
