@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?><srw:searchRetrieveResponse xmlns:srw="http://www.loc.gov/zing/srw/" xmlns="http://catalogue.bnf.fr/namespaces/InterXMarc" xmlns:ixm="http://catalogue.bnf.fr/namespaces/InterXMarc" xmlns:mn="http://catalogue.bnf.fr/namespaces/motsnotices" xmlns:sd="http://www.loc.gov/zing/srw/diagnostic/">
+<srw:version>1.2</srw:version>
+<srw:echoedSearchRetrieveRequest>
+<srw:version>1.2</srw:version>
+<srw:query>aut.persistentid all "ark:/12148/cb12259347g"</srw:query>
+</srw:echoedSearchRetrieveRequest>
+<srw:numberOfRecords>1</srw:numberOfRecords>
+<srw:records>
+<srw:record>
+<srw:recordSchema>marcxchange</srw:recordSchema>
+<srw:recordPacking>xml</srw:recordPacking>
+<srw:recordData>
+<mxc:record xmlns:mxc="info:lc/xmlns/marcxchange-v2" format="UNIMARC" id="ark:/12148/cb12259347g" type="Authority">
+<mxc:leader>     cx  a22        45  </mxc:leader>
+<mxc:controlfield tag="001">FRBNF122593472</mxc:controlfield>
+<mxc:controlfield tag="003">http://catalogue.bnf.fr/ark:/12148/cb12259347g</mxc:controlfield>
+<mxc:controlfield tag="005">20241217</mxc:controlfield>
+<mxc:datafield tag="010" ind1=" " ind2=" ">
+<mxc:subfield code="a">0000000121202494</mxc:subfield>
+<mxc:subfield code="2">VIAF</mxc:subfield>
+<mxc:subfield code="d">20130725</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="039" ind1=" " ind2=" ">
+<mxc:subfield code="o">OPL</mxc:subfield>
+<mxc:subfield code="a">008305751</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="039" ind1=" " ind2=" ">
+<mxc:subfield code="o">OPP</mxc:subfield>
+<mxc:subfield code="a">15312618</mxc:subfield>
+<mxc:subfield code="d">20090116</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="039" ind1=" " ind2=" ">
+<mxc:subfield code="o">OPP</mxc:subfield>
+<mxc:subfield code="a">15432131</mxc:subfield>
+<mxc:subfield code="d">20120531</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="039" ind1=" " ind2=" ">
+<mxc:subfield code="o">OPP</mxc:subfield>
+<mxc:subfield code="a">15432130</mxc:subfield>
+<mxc:subfield code="d">20120531</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="100" ind1=" " ind2=" ">
+<mxc:subfield code="a">19920819afrey50      ba0</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="101" ind1=" " ind2=" ">
+<mxc:subfield code="a">fre</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="102" ind1=" " ind2=" ">
+<mxc:subfield code="a">FR</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="103" ind1=" " ind2=" ">
+<mxc:subfield code="a"> 1604    ? 16780329 </mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="105" ind1=" " ind2=" ">
+<mxc:subfield code="a">a</mxc:subfield>
+<mxc:subfield code="c">l</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="106" ind1=" " ind2=" ">
+<mxc:subfield code="a">010</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="120" ind1=" " ind2=" ">
+<mxc:subfield code="a">b</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="200" ind1=" " ind2="|">
+<mxc:subfield code="7">ba0yba0y</mxc:subfield>
+<mxc:subfield code="8">fre   </mxc:subfield>
+<mxc:subfield code="9"> 0 </mxc:subfield>
+<mxc:subfield code="a">Daret</mxc:subfield>
+<mxc:subfield code="b">Pierre</mxc:subfield>
+<mxc:subfield code="f">1604?-1678</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="300" ind1="|" ind2=" ">
+<mxc:subfield code="a">Graveur sur cuivre. - Éditeur et marchand d'estampes à Paris, rue Saint-Denis</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="301" ind1=" " ind2=" ">
+<mxc:subfield code="a">Paris (France)</mxc:subfield>
+<mxc:subfield code="b">Dax (Landes)</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="801" ind1=" " ind2=" ">
+<mxc:subfield code="a">FR</mxc:subfield>
+<mxc:subfield code="b">FR-751131015</mxc:subfield>
+<mxc:subfield code="c">20241217</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="810" ind1=" " ind2=" ">
+<mxc:subfield code="a">Tableaux historiques où sont gravez les illustres François et étrangers de l'un et de l'autre sexe... avec les éloges sommaires / par Pierre Daret, 1652</mxc:subfield>
+<mxc:subfield code="a">De l'Imitation de Jesus-Christ...  / trad. de Marillac ; [ill. gr . par Pierre Daret], 1652</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="810" ind1=" " ind2=" ">
+<mxc:subfield code="a">Dictionnaire des  éditeurs d'estampes à Paris sous l'Ancien Régime, 1987</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="810" ind1=" " ind2=" ">
+<mxc:subfield code="a">BnF Estampes, Inventaire du fonds français, graveurs du XVIIe siècle / par Roger-Armand Weigert, 1954, Tome III, Chauvel-Duvivier, p. 244-316</mxc:subfield>
+</mxc:datafield>
+</mxc:record>      </srw:recordData>
+<srw:recordIdentifier>ark:/12148/cb12259347g</srw:recordIdentifier>
+<srw:recordPosition>1</srw:recordPosition>
+<srw:extraRecordData>
+<ixm:attr name="CreationDate">19920819</ixm:attr>
+<ixm:attr name="LastModificationDate">20241217</ixm:attr>
+<mn:score>7.512255</mn:score>
+</srw:extraRecordData>
+</srw:record>
+</srw:records>
+</srw:searchRetrieveResponse>

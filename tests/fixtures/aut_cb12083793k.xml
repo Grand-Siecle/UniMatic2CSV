@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?><srw:searchRetrieveResponse xmlns:srw="http://www.loc.gov/zing/srw/" xmlns="http://catalogue.bnf.fr/namespaces/InterXMarc" xmlns:ixm="http://catalogue.bnf.fr/namespaces/InterXMarc" xmlns:mn="http://catalogue.bnf.fr/namespaces/motsnotices" xmlns:sd="http://www.loc.gov/zing/srw/diagnostic/">
+<srw:version>1.2</srw:version>
+<srw:echoedSearchRetrieveRequest>
+<srw:version>1.2</srw:version>
+<srw:query>aut.persistentid all "ark:/12148/cb12083793k"</srw:query>
+</srw:echoedSearchRetrieveRequest>
+<srw:numberOfRecords>1</srw:numberOfRecords>
+<srw:records>
+<srw:record>
+<srw:recordSchema>marcxchange</srw:recordSchema>
+<srw:recordPacking>xml</srw:recordPacking>
+<srw:recordData>
+<mxc:record xmlns:mxc="info:lc/xmlns/marcxchange-v2" format="UNIMARC" id="ark:/12148/cb12083793k" type="Authority">
+<mxc:leader>     cx  a22        45  </mxc:leader>
+<mxc:controlfield tag="001">FRBNF120837935</mxc:controlfield>
+<mxc:controlfield tag="003">http://catalogue.bnf.fr/ark:/12148/cb12083793k</mxc:controlfield>
+<mxc:controlfield tag="005">20240918</mxc:controlfield>
+<mxc:datafield tag="010" ind1=" " ind2=" ">
+<mxc:subfield code="a">0000000120958329</mxc:subfield>
+<mxc:subfield code="2">VIAF</mxc:subfield>
+<mxc:subfield code="d">20130724</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="039" ind1=" " ind2=" ">
+<mxc:subfield code="o">OPL</mxc:subfield>
+<mxc:subfield code="a">001682657</mxc:subfield>
+<mxc:subfield code="z">AMA</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="039" ind1=" " ind2=" ">
+<mxc:subfield code="o">OPL</mxc:subfield>
+<mxc:subfield code="a">004116059</mxc:subfield>
+<mxc:subfield code="z">APP</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="039" ind1=" " ind2=" ">
+<mxc:subfield code="o">OPP</mxc:subfield>
+<mxc:subfield code="a">14319401</mxc:subfield>
+<mxc:subfield code="d">20110124</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="039" ind1=" " ind2=" ">
+<mxc:subfield code="o">OPP</mxc:subfield>
+<mxc:subfield code="a">14869727</mxc:subfield>
+<mxc:subfield code="d">20110124</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="039" ind1=" " ind2=" ">
+<mxc:subfield code="o">OPP</mxc:subfield>
+<mxc:subfield code="a">14319402</mxc:subfield>
+<mxc:subfield code="d">20110124</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="039" ind1=" " ind2=" ">
+<mxc:subfield code="o">OPP</mxc:subfield>
+<mxc:subfield code="a">14319403</mxc:subfield>
+<mxc:subfield code="d">20110124</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="039" ind1=" " ind2=" ">
+<mxc:subfield code="o">OPP</mxc:subfield>
+<mxc:subfield code="a">15445966</mxc:subfield>
+<mxc:subfield code="d">20110124</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="039" ind1=" " ind2=" ">
+<mxc:subfield code="o">OPP</mxc:subfield>
+<mxc:subfield code="a">11042866</mxc:subfield>
+<mxc:subfield code="d">20240118</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="100" ind1=" " ind2=" ">
+<mxc:subfield code="a">19880905afrey50      ba0</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="101" ind1=" " ind2=" ">
+<mxc:subfield code="a">ita</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="102" ind1=" " ind2=" ">
+<mxc:subfield code="a">IT</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="103" ind1=" " ind2=" ">
+<mxc:subfield code="a"> 14040218  14720403 </mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="105" ind1=" " ind2=" ">
+<mxc:subfield code="a">a</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="106" ind1=" " ind2=" ">
+<mxc:subfield code="a">010</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="120" ind1=" " ind2=" ">
+<mxc:subfield code="a">b</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="152" ind1=" " ind2=" ">
+<mxc:subfield code="c">2</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="200" ind1=" " ind2="|">
+<mxc:subfield code="7">ba0yba0y</mxc:subfield>
+<mxc:subfield code="8">fre   </mxc:subfield>
+<mxc:subfield code="9"> 0 </mxc:subfield>
+<mxc:subfield code="a">Alberti</mxc:subfield>
+<mxc:subfield code="b">Leon Battista</mxc:subfield>
+<mxc:subfield code="f">1404-1472</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="300" ind1="|" ind2=" ">
+<mxc:subfield code="a">A aussi écrit en latin</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="300" ind1="|" ind2=" ">
+<mxc:subfield code="a">Architecte, sculpteur, musicien humaniste</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="301" ind1=" " ind2=" ">
+<mxc:subfield code="a">Gênes (Italie)</mxc:subfield>
+<mxc:subfield code="b">Rome (Italie)</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="400" ind1=" " ind2="|">
+<mxc:subfield code="7">ba0yba0y</mxc:subfield>
+<mxc:subfield code="8">fre   </mxc:subfield>
+<mxc:subfield code="9">   </mxc:subfield>
+<mxc:subfield code="a">Albertus</mxc:subfield>
+<mxc:subfield code="b">Leo Baptista</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="400" ind1=" " ind2="|">
+<mxc:subfield code="7">ba0yba0y</mxc:subfield>
+<mxc:subfield code="8">fre   </mxc:subfield>
+<mxc:subfield code="9">   </mxc:subfield>
+<mxc:subfield code="a">Alberti</mxc:subfield>
+<mxc:subfield code="b">Leone Battista</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="400" ind1=" " ind2="|">
+<mxc:subfield code="7">ba0yba0y</mxc:subfield>
+<mxc:subfield code="8">fre   </mxc:subfield>
+<mxc:subfield code="9">   </mxc:subfield>
+<mxc:subfield code="a">Albert</mxc:subfield>
+<mxc:subfield code="b">Léon-Baptiste</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="686" ind1=" " ind2=" ">
+<mxc:subfield code="a">750</mxc:subfield>
+<mxc:subfield code="c">Peinture</mxc:subfield>
+<mxc:subfield code="2">Note de regroupement par domaine</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="801" ind1=" " ind2=" ">
+<mxc:subfield code="a">FR</mxc:subfield>
+<mxc:subfield code="b">FR-751131015</mxc:subfield>
+<mxc:subfield code="c">20240918</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="810" ind1=" " ind2=" ">
+<mxc:subfield code="a">Apologhi ed elogi / Leon Battista Alberti, 1984</mxc:subfield>
+<mxc:subfield code="a">L'architecture et art de bien bastir / du seigneur Léon-Baptiste Albert, 1553</mxc:subfield>
+<mxc:subfield code="a">Leonis Baptistae Alberti Opera inedita et pauca separatim impressa / Hieronymo Mancini curante, 1890</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="810" ind1=" " ind2=" ">
+<mxc:subfield code="a">Dizionario biografico universale / G. Garollo, 1907</mxc:subfield>
+<mxc:subfield code="a">Encicl. italiana</mxc:subfield>
+<mxc:subfield code="a">GDEL</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="810" ind1=" " ind2=" ">
+<mxc:subfield code="a">BN Cat. gén.</mxc:subfield>
+</mxc:datafield>
+</mxc:record>      </srw:recordData>
+<srw:recordIdentifier>ark:/12148/cb12083793k</srw:recordIdentifier>
+<srw:recordPosition>1</srw:recordPosition>
+<srw:extraRecordData>
+<ixm:attr name="CreationDate">19880905</ixm:attr>
+<ixm:attr name="LastModificationDate">20240918</ixm:attr>
+<mn:score>7.512255</mn:score>
+</srw:extraRecordData>
+</srw:record>
+</srw:records>
+</srw:searchRetrieveResponse>
