@@ -81,7 +81,7 @@ Un Ctrl+C pendant l'enrichissement enregistre les lignes déjà traitées. Si le
 | `ID_Lieu_publication` | GeoNames |
 | `Date_01` | 100 $a (date codée), sinon l'année de 210 $d |
 | `Sujet` | 606, vedettes RAMEAU `a -- x -- y -- z` séparées par `\|` |
-| `Cote` | 930 $a : les cotes des exemplaires numérisés (`NUMM-…`) s'il y en a, sinon la première cote |
+| `Cote` | 930 $a : les cotes des exemplaires numérisés (`NUMM-…`) s'il y en a, sinon la première cote. Rien n'est écrit si `Localisation` indique une autre bibliothèque que la BnF |
 
 ## Conseils pour les fichiers
 

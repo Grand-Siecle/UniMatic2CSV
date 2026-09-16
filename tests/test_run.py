@@ -98,3 +98,10 @@ def test_matches_variant_names_and_swapped_columns():
     assert cli.matches(pd.Series({"Prenoms": "François", "Nom": "Hédelin"}), AubignacNotice())
     assert cli.matches(pd.Series({"Prenoms": "Aubignac", "Nom": None}), AubignacNotice())
     assert not cli.matches(pd.Series({"Prenoms": "Thomas", "Nom": "Soubron"}), AubignacNotice())
+
+
+def test_bnf_shelfmark_only_for_bnf_copies():
+    assert cli.bnf_copy(pd.Series({"Localisation": "BnF"}))
+    assert cli.bnf_copy(pd.Series({"Localisation": None}))
+    assert cli.bnf_copy(pd.Series({"Titre_abrege": "Traité"}))  # no Localisation column
+    assert not cli.bnf_copy(pd.Series({"Localisation": "Lyon, Bibliothèque municipale"}))

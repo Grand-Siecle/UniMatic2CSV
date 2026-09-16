@@ -36,6 +36,12 @@ def matches(row, notice):
     return not scores or max(scores) >= MIN_SIMILARITY
 
 
+def bnf_copy(row):
+    """False when the Localisation column names another library: a BnF shelfmark would then be wrong."""
+    place = row.get("Localisation")
+    return pd.isna(place) or "bnf" in place.lower() or "nationale de france" in place.lower()
+
+
 def fill_empty(df, index, values):
     """Write the values in the empty cells of the row only; returns the number of filled cells."""
     filled = 0
@@ -155,7 +161,10 @@ def run(filename: str, objet: str, header: int, output: str, no_check: bool):
                     stats["mismatch"] += 1
                     continue
 
-                filled = fill_empty(df, index, notice.to_dict())
+                values = notice.to_dict()
+                if not bnf_copy(df.loc[index]):
+                    values.pop("Cote", None)
+                filled = fill_empty(df, index, values)
                 for place, id_column in notice.PLACES.items():
                     if place in df.columns and id_column in df.columns and pd.isna(df.at[index, id_column]):
                         filled += fill_empty(df, index, {id_column: geonames.get_id(df.at[index, place])})
