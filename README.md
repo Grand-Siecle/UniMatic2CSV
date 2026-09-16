@@ -45,7 +45,7 @@ python run.py fiche_personne_enrich.csv PERS
 L'affichage comprend :
 - **un en-tête** : fichier, nombre de lignes, séparateur, GeoNames activé ou non ;
 - **deux barres de progression** : interrogation de la BnF, puis enrichissement des lignes ;
-- **un tableau des lignes à vérifier**, limité aux 20 premières : ARK hors catalogue BnF, ARK en double, notice introuvable, nom ou titre différent de la notice. La liste complète est enregistrée à côté du fichier, dans `FICHIER_a_verifier.csv` ;
+- **un tableau des lignes à vérifier**, limité aux 20 premières : ARK hors catalogue BnF, ARK en double, notice introuvable, nom ou titre différent de la notice, notice d'œuvre au lieu d'une personne, notice de reproduction (microforme, fac-similé). La liste complète est enregistrée à côté du fichier, dans `FICHIER_a_verifier.csv` ;
 - **un résumé** : cellules remplies, ISNI complétés, lignes ignorées.
 
 Un Ctrl+C pendant l'enrichissement enregistre les lignes déjà traitées. Si le catalogue BnF ne répond plus (même après les nouvelles tentatives), l'outil arrête de l'interroger, utilise les notices déjà reçues et enregistre le fichier : il suffit de relancer plus tard.
@@ -56,7 +56,8 @@ Un Ctrl+C pendant l'enrichissement enregistre les lignes déjà traitées. Si le
 2. **Colonne `ARK` obligatoire.** Elle contient un ARK du catalogue général (`ark:/12148/cb…`), seul ou dans une URL. Les autres identifiants (Archives et manuscrits, autres bibliothèques…) sont ignorés.
 3. **Interrogation de la BnF.** L'outil envoie un lot de 50 ARK par requête, avec au plus une requête par seconde. Si une notice illisible côté BnF fait échouer un lot, le lot est coupé en deux jusqu'à isoler cette notice.
 4. **Vérification.** Le nom de la personne (`Nom` ou `Prenoms`, comparés au nom et à ses variantes dans la notice) ou le titre abrégé (`Titre_abrege`) doit ressembler à la notice. Sinon, la ligne est **ignorée et signalée**. Cela évite d'écrire les données d'un autre livre quand la colonne `ARK` a été décalée. Les pseudonymes ou les titres très différents peuvent aussi être signalés : vérifiez-les, puis utilisez `--no-check` si besoin.
-5. **Remplissage des cellules vides.** Les ISNI dont les zéros initiaux ont été supprimés par un tableur sont aussi remis sur 16 caractères.
+5. **Type de notice.** Dans les fiches personnes, un ARK qui désigne une œuvre (par exemple « Pascal. Pensées ») est refusé et signalé. Dans les fiches livres, une notice de reproduction (microforme, fac-similé) est signalée, et ni son lieu ni sa date ne sont repris, car ce sont ceux de la reproduction.
+6. **Remplissage des cellules vides.** Les ISNI dont les zéros initiaux ont été supprimés par un tableur sont aussi remis sur 16 caractères.
 
 ### Colonnes remplies
 
@@ -65,9 +66,9 @@ Un Ctrl+C pendant l'enrichissement enregistre les lignes déjà traitées. Si le
 | Colonne | Source |
 |---|---|
 | `ISNI` | 010 $a |
-| `Annee_naissance`, `Annee_mort` | 103 $a, au format `AAAA/MM/JJ` (`1604?` si la date est incertaine, `16..` si elle est partielle) |
+| `Annee_naissance`, `Annee_mort` | 103 $a, au format `AAAA/MM/JJ` (`1604?` si la date est incertaine, `16..` si elle est partielle, `-106/01/03` avant J.-C.) |
 | `Ville_naissance`, `Ville_mort` | 301 $a, 301 $b |
-| `ID_Ville_naissance`, `ID_Ville_mort` | GeoNames |
+| `ID_Ville_naissance`, `ID_Ville_mort` | GeoNames (recherche limitée au pays indiqué entre parenthèses ; un département indique la France) |
 | `Professions` | 300 $a (plusieurs notes séparées par `\|`) |
 
 **BOOK**
@@ -75,10 +76,10 @@ Un Ctrl+C pendant l'enrichissement enregistre les lignes déjà traitées. Si le
 | Colonne | Source |
 |---|---|
 | `Titre_long` | 200 $a |
-| `Format` | 215 $d (ou 215 $a, 210 $d), converti : `in-4` → `in-quarto`, `in-fol.` → `in-folio`… |
-| `Lieu_publication` | 620 $d (forme normalisée), sinon 214 $a ou 210 $a |
+| `Format` | 215 $d (ou 215 $a, 210 $d), converti : `in-4` → `in-quarto`, `in-fol.` → `in-folio`… (une dimension en cm ou en mm n'est pas reprise) |
+| `Lieu_publication` | 620 $d (forme normalisée), sinon 214 $a ou 210 $a (jamais « [S.l.] ») |
 | `ID_Lieu_publication` | GeoNames |
-| `Date_01` | 100 $a (date codée), sinon 210 $d |
+| `Date_01` | 100 $a (date codée), sinon l'année de 210 $d |
 | `Sujet` | 606, vedettes RAMEAU `a -- x -- y -- z` séparées par `\|` |
 | `Cote` | 930 $a : les cotes des exemplaires numérisés (`NUMM-…`) s'il y en a, sinon la première cote |
 

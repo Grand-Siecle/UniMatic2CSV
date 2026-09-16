@@ -60,3 +60,29 @@ def test_book_format_in_215a_and_no_digitised_copy(record):
     assert data["Format"] == "in-octavo"  # "In-8° , pièce limin., ..."
     assert data["Date_01"] == "1598"  # 210 $d is "1598. 2e éd."
     assert data["Cote"] == "D-50578"
+
+
+def test_book_reproduction_keeps_no_place_nor_date(record):
+    book = Book(record("bib_cb35153778v"))  # microfiche (1972) of "Le Parnasse alarmé" (1649)
+    data = book.to_dict()
+    assert book.reproduction()
+    assert data["Lieu_publication"] is None and data["Date_01"] is None
+    assert data["Format"] is None  # "105x148 mm" is not a format of the CSV vocabulary
+
+
+def test_book_without_place_nor_year(record):
+    data = Book(record("bib_cb30092742k")).to_dict()  # [S.l.], "Imprimé ceste année"
+    assert data["Lieu_publication"] is None
+    assert data["Date_01"] is None
+    assert data["Format"] == "in-douze"
+
+
+def test_work_record_is_not_a_person(record):
+    assert not Person(record("aut_cb119402398")).is_person()  # "Pascal. Pensées"
+    assert Person(record("aut_cb12083793k")).is_person()
+
+
+def test_person_dates_before_christ(record):
+    data = Person(record("aut_cb11885977m")).to_dict()  # Cicéron: 103 "-01060103 -00431207"
+    assert data["Annee_naissance"] == "-106/01/03"
+    assert data["Annee_mort"] == "-43/12/07"

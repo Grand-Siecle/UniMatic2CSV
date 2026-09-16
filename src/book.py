@@ -22,13 +22,21 @@ class Book(Notice):
     def labels(self):
         return self.values("200", "a")
 
+    def reproduction(self):
+        """True for a microform or facsimile record: its place and date are those of the reproduction."""
+        coded = self.value("100", "a") or ""
+        return coded[8:9] == "e" or any("microforme" in v.lower() for v in self.values("200", "b"))
+
     def get_title(self) -> Dict:
         # -- title (200 subfield "a") and format (215 "d", sometimes written in 215 "a" or 210 "d") --
         return {"Titre_long": self.value("200", "a"), "Format": self._format()}
 
     def get_publication(self) -> Dict:
-        # -- place: normalised form (620 "d") if any, else as printed (214 or 210 "a") --
-        place = self.value("620", "d") or self.value("214", "a") or self.value("210", "a")
+        if self.reproduction():
+            return {"Lieu_publication": None, "Date_01": None}
+        # -- place: normalised form (620 "d") if any, else as printed (214 or 210 "a"), never "[S.l.]" --
+        places = self.values("620", "d") + self.values("214", "a") + self.values("210", "a")
+        place = next((p for p in places if not re.fullmatch(r"\[?\(?s\.\s?l\.?\)?\]?", p, flags=re.IGNORECASE)), None)
         return {"Lieu_publication": place, "Date_01": self._date()}
 
     def get_matiere(self) -> Dict:
@@ -55,7 +63,7 @@ class Book(Notice):
             match = re.search(r"\bin-?\s*(fol|plano|\d+)", text, flags=re.IGNORECASE)
             if match and match.group(1).lower() in FORMATS:
                 return FORMATS[match.group(1).lower()]
-        return self.value("215", "d")
+        return None  # e.g. "23 cm" or "35 mm" (microfilm): not a format of the CSV vocabulary
 
     def _date(self):
         # coded publication date (100 "a", positions 9-12) is cleaner than the printed one (210 "d")
@@ -64,4 +72,4 @@ class Book(Notice):
             return coded[9:13].strip()
         printed = self.value("214", "d") or self.value("210", "d")
         match = re.search(r"\d{4}", printed or "")
-        return match.group(0) if match else printed
+        return match.group(0) if match else None  # e.g. "Imprimé ceste année"

@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?><srw:searchRetrieveResponse xmlns:srw="http://www.loc.gov/zing/srw/"><srw:records><srw:record><srw:recordData><mxc:record xmlns:mxc="info:lc/xmlns/marcxchange-v2" xmlns:srw="http://www.loc.gov/zing/srw/" xmlns="http://catalogue.bnf.fr/namespaces/InterXMarc" xmlns:ixm="http://catalogue.bnf.fr/namespaces/InterXMarc" xmlns:mn="http://catalogue.bnf.fr/namespaces/motsnotices" xmlns:sd="http://www.loc.gov/zing/srw/diagnostic/" format="UNIMARC" id="ark:/12148/cb11885977m" type="Authority">
+<mxc:leader>     cx  a22        45  </mxc:leader>
+<mxc:controlfield tag="001">FRBNF118859771</mxc:controlfield>
+<mxc:controlfield tag="003">http://catalogue.bnf.fr/ark:/12148/cb11885977m</mxc:controlfield>
+<mxc:controlfield tag="005">20211222</mxc:controlfield>
+<mxc:datafield tag="010" ind1=" " ind2=" ">
+<mxc:subfield code="a">0000000139322910</mxc:subfield>
+<mxc:subfield code="2">VIAF</mxc:subfield>
+<mxc:subfield code="d">20130724</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="010" ind1=" " ind2=" ">
+<mxc:subfield code="y">0000000502704658</mxc:subfield>
+<mxc:subfield code="2">ISNI</mxc:subfield>
+<mxc:subfield code="d">20210623</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="039" ind1=" " ind2=" ">
+<mxc:subfield code="o">OPL</mxc:subfield>
+<mxc:subfield code="a">001578060</mxc:subfield>
+<mxc:subfield code="z">AMA</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="039" ind1=" " ind2=" ">
+<mxc:subfield code="o">OPL</mxc:subfield>
+<mxc:subfield code="a">00035701X</mxc:subfield>
+<mxc:subfield code="z">APP</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="039" ind1=" " ind2=" ">
+<mxc:subfield code="o">OPP</mxc:subfield>
+<mxc:subfield code="a">14299966</mxc:subfield>
+<mxc:subfield code="d">20080703</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="039" ind1=" " ind2=" ">
+<mxc:subfield code="o">OPP</mxc:subfield>
+<mxc:subfield code="a">14357421</mxc:subfield>
+<mxc:subfield code="d">20080703</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="039" ind1=" " ind2=" ">
+<mxc:subfield code="o">OPP</mxc:subfield>
+<mxc:subfield code="a">14357425</mxc:subfield>
+<mxc:subfield code="d">20080703</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="039" ind1=" " ind2=" ">
+<mxc:subfield code="o">OPP</mxc:subfield>
+<mxc:subfield code="a">14955853</mxc:subfield>
+<mxc:subfield code="d">20080703</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="039" ind1=" " ind2=" ">
+<mxc:subfield code="o">OPP</mxc:subfield>
+<mxc:subfield code="a">14323575</mxc:subfield>
+<mxc:subfield code="d">20080703</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="039" ind1=" " ind2=" ">
+<mxc:subfield code="o">OPP</mxc:subfield>
+<mxc:subfield code="a">14357422</mxc:subfield>
+<mxc:subfield code="d">20080703</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="039" ind1=" " ind2=" ">
+<mxc:subfield code="o">OPP</mxc:subfield>
+<mxc:subfield code="a">15455673</mxc:subfield>
+<mxc:subfield code="d">20121009</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="039" ind1=" " ind2=" ">
+<mxc:subfield code="o">OPP</mxc:subfield>
+<mxc:subfield code="a">15455670</mxc:subfield>
+<mxc:subfield code="d">20121009</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="039" ind1=" " ind2=" ">
+<mxc:subfield code="o">OPP</mxc:subfield>
+<mxc:subfield code="a">16291373</mxc:subfield>
+<mxc:subfield code="d">20170410</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="039" ind1=" " ind2=" ">
+<mxc:subfield code="o">OPP</mxc:subfield>
+<mxc:subfield code="a">16827007</mxc:subfield>
+<mxc:subfield code="d">20170410</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="039" ind1=" " ind2=" ">
+<mxc:subfield code="o">OPP</mxc:subfield>
+<mxc:subfield code="a">16498343</mxc:subfield>
+<mxc:subfield code="d">20191004</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="039" ind1=" " ind2=" ">
+<mxc:subfield code="o">OPP</mxc:subfield>
+<mxc:subfield code="a">17358319</mxc:subfield>
+<mxc:subfield code="d">20211222</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="100" ind1=" " ind2=" ">
+<mxc:subfield code="a">19840703afrey50      ba0</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="101" ind1=" " ind2=" ">
+<mxc:subfield code="a">lat</mxc:subfield>
+<mxc:subfield code="t">grc</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="102" ind1=" " ind2=" ">
+<mxc:subfield code="a">XX</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="103" ind1=" " ind2=" ">
+<mxc:subfield code="a">-01060103 -00431207 </mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="105" ind1=" " ind2=" ">
+<mxc:subfield code="a">a</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="106" ind1=" " ind2=" ">
+<mxc:subfield code="a">010</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="120" ind1=" " ind2=" ">
+<mxc:subfield code="a">b</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="152" ind1=" " ind2=" ">
+<mxc:subfield code="c">2</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="200" ind1=" " ind2="|">
+<mxc:subfield code="7">ba0yba0y</mxc:subfield>
+<mxc:subfield code="8">frefre</mxc:subfield>
+<mxc:subfield code="9"> 1 </mxc:subfield>
+<mxc:subfield code="a">Cicéron</mxc:subfield>
+<mxc:subfield code="f">0106-0043 av. J.-C.</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="300" ind1="|" ind2=" ">
+<mxc:subfield code="a">Orateur, homme politique et philosophe</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="301" ind1=" " ind2=" ">
+<mxc:subfield code="a">Arpinum, Italie</mxc:subfield>
+<mxc:subfield code="b">près d'Arpinum, Italie</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="400" ind1=" " ind2="|">
+<mxc:subfield code="7">ba0yba0y</mxc:subfield>
+<mxc:subfield code="8">fre   </mxc:subfield>
+<mxc:subfield code="9">   </mxc:subfield>
+<mxc:subfield code="a">Tullius Cicero</mxc:subfield>
+<mxc:subfield code="b">Marcus</mxc:subfield>
+<mxc:subfield code="f">0106-0043 av. J.-C.</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="400" ind1=" " ind2="|">
+<mxc:subfield code="7">ba0yba0y</mxc:subfield>
+<mxc:subfield code="8">freita</mxc:subfield>
+<mxc:subfield code="9">   </mxc:subfield>
+<mxc:subfield code="a">Cicerone</mxc:subfield>
+<mxc:subfield code="b">Marco Tullio</mxc:subfield>
+<mxc:subfield code="f">0106-0043 av. J.-C.</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="400" ind1=" " ind2="|">
+<mxc:subfield code="7">ba0yba0a</mxc:subfield>
+<mxc:subfield code="8">fregre</mxc:subfield>
+<mxc:subfield code="9">   </mxc:subfield>
+<mxc:subfield code="a">Kikérōnas</mxc:subfield>
+<mxc:subfield code="b">Márkos Túllios</mxc:subfield>
+<mxc:subfield code="f">0106-0043 av. J.C.</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="400" ind1=" " ind2="|">
+<mxc:subfield code="7">ba0yga0y</mxc:subfield>
+<mxc:subfield code="8">fregre</mxc:subfield>
+<mxc:subfield code="9">   </mxc:subfield>
+<mxc:subfield code="a">Κικέρωνας</mxc:subfield>
+<mxc:subfield code="b">Μάρκος Τύλλιος</mxc:subfield>
+<mxc:subfield code="f">0106-0043 av. J.-C.</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="400" ind1=" " ind2="|">
+<mxc:subfield code="7">ba0yba0a</mxc:subfield>
+<mxc:subfield code="8">freheb</mxc:subfield>
+<mxc:subfield code="9">   </mxc:subfield>
+<mxc:subfield code="a">Qiyqerw</mxc:subfield>
+<mxc:subfield code="b">Marqws Ṭwlyws</mxc:subfield>
+<mxc:subfield code="f">0106-0043 av. J.-C.</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="400" ind1=" " ind2="|">
+<mxc:subfield code="7">ba0yba0a</mxc:subfield>
+<mxc:subfield code="8">frerus</mxc:subfield>
+<mxc:subfield code="9">   </mxc:subfield>
+<mxc:subfield code="a">Ciceron</mxc:subfield>
+<mxc:subfield code="b">Mark Tullij C.</mxc:subfield>
+<mxc:subfield code="f">0106-0043 av. J.-C.</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="400" ind1=" " ind2="|">
+<mxc:subfield code="7">ba0yca0y</mxc:subfield>
+<mxc:subfield code="8">frerus</mxc:subfield>
+<mxc:subfield code="9">   </mxc:subfield>
+<mxc:subfield code="a">Цицерон</mxc:subfield>
+<mxc:subfield code="b">Марк Туллий Ц.</mxc:subfield>
+<mxc:subfield code="f">0106-0043 av. J.-C.</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="530" ind1=" " ind2=" ">
+<mxc:subfield code="5">z</mxc:subfield>
+<mxc:subfield code="3">16110870</mxc:subfield>
+<mxc:subfield code="a">Synonyma Ciceronis</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="530" ind1=" " ind2=" ">
+<mxc:subfield code="5">z</mxc:subfield>
+<mxc:subfield code="3">12208199</mxc:subfield>
+<mxc:subfield code="a">Rhétorique à Herennius</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="686" ind1=" " ind2=" ">
+<mxc:subfield code="a">800</mxc:subfield>
+<mxc:subfield code="c">Histoire et critique littéraires</mxc:subfield>
+<mxc:subfield code="2">Note de regroupement par domaine</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="686" ind1=" " ind2=" ">
+<mxc:subfield code="a">320</mxc:subfield>
+<mxc:subfield code="c">Sciences politiques</mxc:subfield>
+<mxc:subfield code="2">Note de regroupement par domaine</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="700" ind1=" " ind2="|">
+<mxc:subfield code="7">ba0yba0y</mxc:subfield>
+<mxc:subfield code="8">frelat</mxc:subfield>
+<mxc:subfield code="9"> 0 </mxc:subfield>
+<mxc:subfield code="a">Cicero</mxc:subfield>
+<mxc:subfield code="b">Marcus Tullius</mxc:subfield>
+<mxc:subfield code="f">0106-0043 av. J.-C.</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="801" ind1=" " ind2=" ">
+<mxc:subfield code="a">FR</mxc:subfield>
+<mxc:subfield code="b">FR-751131015</mxc:subfield>
+<mxc:subfield code="c">20211222</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="810" ind1=" " ind2=" ">
+<mxc:subfield code="a">L'amitié / Cicéron ; texte établi et traduit par Louis Laurand, 1965</mxc:subfield>
+<mxc:subfield code="a">Scripta quae manserunt omnia, fasc. 16 / M. Tullius Cicero, 1963-</mxc:subfield>
+<mxc:subfield code="a">ʿAl haḥwbwt / Marqws Ṭwlyws Qiyqerw ; tirgmah merwmiyt whwsiypah heʿarwt, ʾAbiybah Qaṣiyr, 5763, 2003</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="810" ind1=" " ind2=" ">
+<mxc:subfield code="a">GDEL : Cicéron, en lat. Marcus Tullius Cicero</mxc:subfield>
+<mxc:subfield code="a">Clavis SGL : Cicero, Marcus Tullius Cicero orator consul</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="810" ind1=" " ind2=" ">
+<mxc:subfield code="a">BN Cat. gén.</mxc:subfield>
+<mxc:subfield code="a">BN Cat. gén. suppl.</mxc:subfield>
+<mxc:subfield code="a">BN Cat. gén. 1960-1969</mxc:subfield>
+</mxc:datafield>
+</mxc:record>      </srw:recordData></srw:record></srw:records></srw:searchRetrieveResponse>

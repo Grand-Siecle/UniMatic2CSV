@@ -144,6 +144,12 @@ def run(filename: str, objet: str, header: int, output: str, no_check: bool):
                     continue
 
                 notice = notice_class(records[ark])
+                if isinstance(notice, Person) and not notice.is_person():
+                    issues.append((label, ark, "notice d'œuvre", "l'ARK ne désigne pas une personne"))
+                    stats["mismatch"] += 1
+                    continue
+                if isinstance(notice, Book) and notice.reproduction():
+                    issues.append((label, ark, "reproduction", "microforme ou fac-similé : lieu et date non repris"))
                 if not no_check and not matches(df.loc[index], notice):
                     issues.append((label, ark, "nom/titre différent", notice.labels()[0]))
                     stats["mismatch"] += 1

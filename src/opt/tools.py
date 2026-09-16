@@ -32,7 +32,11 @@ def marc_date(value):
     year = value[0:4]
     if not year:
         return None
-    parts = [year] + [part for part in (value[4:6], value[6:8]) if part.isdigit()]
+    parts = [year]
+    if value[4:6].isdigit():
+        parts.append(value[4:6])
+        if value[6:8].isdigit():
+            parts.append(value[6:8])
     return "/".join(parts)
 
 

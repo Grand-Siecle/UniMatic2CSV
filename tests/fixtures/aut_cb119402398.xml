@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?><srw:searchRetrieveResponse xmlns:srw="http://www.loc.gov/zing/srw/"><srw:records><srw:record><srw:recordData><mxc:record xmlns:mxc="info:lc/xmlns/marcxchange-v2" xmlns:srw="http://www.loc.gov/zing/srw/" xmlns="http://catalogue.bnf.fr/namespaces/InterXMarc" xmlns:ixm="http://catalogue.bnf.fr/namespaces/InterXMarc" xmlns:mn="http://catalogue.bnf.fr/namespaces/motsnotices" xmlns:sd="http://www.loc.gov/zing/srw/diagnostic/" format="UNIMARC" id="ark:/12148/cb119402398" type="Authority">
+<mxc:leader>     cx  h22        45  </mxc:leader>
+<mxc:controlfield tag="001">FRBNF119402398</mxc:controlfield>
+<mxc:controlfield tag="003">http://catalogue.bnf.fr/ark:/12148/cb119402398</mxc:controlfield>
+<mxc:controlfield tag="005">20040719</mxc:controlfield>
+<mxc:datafield tag="039" ind1=" " ind2=" ">
+<mxc:subfield code="o">OPL</mxc:subfield>
+<mxc:subfield code="a">00163221X</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="100" ind1=" " ind2=" ">
+<mxc:subfield code="a">19810602afrey50      ba0</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="101" ind1="0" ind2=" ">
+<mxc:subfield code="a">fre</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="102" ind1=" " ind2=" ">
+<mxc:subfield code="a">XX</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="103" ind1=" " ind2=" ">
+<mxc:subfield code="a"> 1657      1662     </mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="106" ind1=" " ind2=" ">
+<mxc:subfield code="a">010</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="152" ind1=" " ind2=" ">
+<mxc:subfield code="c">2</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="154" ind1=" " ind2=" ">
+<mxc:subfield code="a">|a</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="240" ind1=" " ind2=" ">
+<mxc:subfield code="a">Pascal</mxc:subfield>
+<mxc:subfield code="b">Blaise</mxc:subfield>
+<mxc:subfield code="f">1623-1662</mxc:subfield>
+<mxc:subfield code="9"> 0 </mxc:subfield>
+<mxc:subfield code="7">ba0yba0y</mxc:subfield>
+<mxc:subfield code="8">frefre</mxc:subfield>
+<mxc:subfield code="t">Pensées</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="300" ind1="|" ind2=" ">
+<mxc:subfield code="a">Catégorie de l'oeuvre : Oeuvres textuelles</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="300" ind1="|" ind2=" ">
+<mxc:subfield code="a">Sous ce titre ont été publiés les fragments d'une oeuvre inachevée, qui aurait dû porter le titre : "Apologie de la religion chrétienne"</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="440" ind1=" " ind2=" ">
+<mxc:subfield code="a">Pascal</mxc:subfield>
+<mxc:subfield code="b">Blaise</mxc:subfield>
+<mxc:subfield code="f">1623-1662</mxc:subfield>
+<mxc:subfield code="7">ba0yba0y</mxc:subfield>
+<mxc:subfield code="8">frefre</mxc:subfield>
+<mxc:subfield code="t">Apologie de la religion chrétienne</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="440" ind1=" " ind2=" ">
+<mxc:subfield code="a">Pascal</mxc:subfield>
+<mxc:subfield code="b">Blaise</mxc:subfield>
+<mxc:subfield code="f">1623-1662</mxc:subfield>
+<mxc:subfield code="7">ba0yba0y</mxc:subfield>
+<mxc:subfield code="8">frefre</mxc:subfield>
+<mxc:subfield code="t">Pensées de monsieur Pascal sur la religion et sur quelques autres sujets</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="540" ind1=" " ind2=" ">
+<mxc:subfield code="5">h</mxc:subfield>
+<mxc:subfield code="3">11950424</mxc:subfield>
+<mxc:subfield code="a">Pascal</mxc:subfield>
+<mxc:subfield code="b">Blaise</mxc:subfield>
+<mxc:subfield code="f">1623-1662</mxc:subfield>
+<mxc:subfield code="t">Le pari</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="801" ind1=" " ind2=" ">
+<mxc:subfield code="a">FR</mxc:subfield>
+<mxc:subfield code="b">FR-751131015</mxc:subfield>
+<mxc:subfield code="c">20040719</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="810" ind1=" " ind2=" ">
+<mxc:subfield code="a">Encycl. philosophique universelle. III, Les oeuvres philosophiques / sous la dir. de Jean-François Mattéi, 1992 (sous : Pascal, Blaise) : forme retenue</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="810" ind1=" " ind2=" ">
+<mxc:subfield code="a">Dict. spiritualité (sous : Pascal, Blaise) : Apologie de la religion chrétienne</mxc:subfield>
+<mxc:subfield code="a">DTC (sous : Pascal, Blaise) : Pensées de monsieur Pascal sur la religion et sur quelques autres sujets</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="810" ind1=" " ind2=" ">
+<mxc:subfield code="a">BN Cat. gén. (sous : Pascal, Blaise) : Pensées</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="815" ind1=" " ind2=" ">
+<mxc:subfield code="a">BN Cat. gén. 1960-1969 (sous : Pascal, Blaise) : pas de titre de classement</mxc:subfield>
+</mxc:datafield>
+</mxc:record>      </srw:recordData></srw:record></srw:records></srw:searchRetrieveResponse>
