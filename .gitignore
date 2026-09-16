@@ -1,5 +1,6 @@
 .env/
 __pychache__/
+*.pyc
 .idea/
 test/
 output/
