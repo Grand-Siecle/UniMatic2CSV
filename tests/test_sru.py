@@ -1,4 +1,5 @@
 import pytest
+import requests
 
 from src.base import SRU, SRUError, parse_response
 from tests.conftest import sru_response
@@ -91,3 +92,23 @@ DIAGNOSTIC = b"""<srw:searchRetrieveResponse xmlns:srw="http://www.loc.gov/zing/
 def test_parse_response_diagnostic():
     with pytest.raises(SRUError, match="probleme lecture trame XML"):
         parse_response(DIAGNOSTIC)
+
+
+def test_fetch_keeps_records_when_the_catalogue_stops_answering(sru):
+    client = sru({ALBERTI: "aut_cb12083793k", AERTSSENS: "aut_cb12230181h"})
+    client.BATCH_SIZE = 1
+    get = client.session.get
+
+    def fail_after_first(url, timeout, params):
+        if client.session.queries:
+            client.session.queries.append(params)
+            raise requests.ConnectionError("connection refused")
+        return get(url, timeout, params)
+
+    client.session.get = fail_after_first
+    records = client.fetch([ALBERTI, AERTSSENS, "ark:/12148/cb11111111z"], "PERS")
+
+    assert list(records) == [ALBERTI]
+    assert client.unavailable == "connection refused"
+    assert set(client.errors) == {AERTSSENS, "ark:/12148/cb11111111z"}
+    assert len(client.session.queries) == 2  # no more requests once the catalogue fails

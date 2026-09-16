@@ -53,7 +53,7 @@ class SRU(object):
 
     def __init__(self, session=None):
         self.session = session or http_session()
-        self.errors = {}
+        self.errors, self.unavailable = {}, None
         self._last_request = 0.0
 
     def request(self, query, maximum_records):
@@ -69,7 +69,10 @@ class SRU(object):
             "query": query,
         })
         r.raise_for_status()
-        return parse_response(r.content)
+        try:
+            return parse_response(r.content)
+        except etree.XMLSyntaxError as err:  # e.g. an HTML maintenance page
+            raise requests.RequestException(f"réponse illisible du catalogue ({err})") from err
 
     def fetch(self, arks, mode, advance=None):
         """Fetch the records of several ARKs.
@@ -78,7 +81,8 @@ class SRU(object):
         advance: optional callback, called with the number of ARKs processed (progress bar)
         Returns:
             records (dict): {ark: record XML element} for the ARKs found in the catalogue
-            (self.errors keeps {ark: message} for the records the API could not send)
+            (self.errors keeps {ark: message} for the records the API could not send, and
+            self.unavailable the error if the catalogue stopped answering: the remaining ARKs are not asked)
         """
         if mode == "PERS":
             # "sparse" authority records are only returned when explicitly asked for
@@ -89,24 +93,30 @@ class SRU(object):
             raise ValueError("Verify mode value error")
 
         arks = list(dict.fromkeys(arks))
-        self.errors = {}
+        self.errors, self.unavailable = {}, None
         records = {}
-        for start in range(0, len(arks), self.BATCH_SIZE):
-            batch = arks[start:start + self.BATCH_SIZE]
-            found = self._fetch_batch(template, batch)
-            records.update({ark: found[ark] for ark in batch if ark in found})
-            if advance:
-                advance(len(batch))
+        try:
+            for start in range(0, len(arks), self.BATCH_SIZE):
+                batch = arks[start:start + self.BATCH_SIZE]
+                found = self._fetch_batch(template, batch)
+                records.update({ark: found[ark] for ark in batch if ark in found})
+                if advance:
+                    advance(len(batch))
 
-        # A merged record is returned under its new ARK: ask again for it alone.
-        for ark in [ark for ark in arks if ark not in records and ark not in self.errors]:
-            try:
-                found = self.request(template.format(relation="all", arks=ark), 1)
-            except SRUError as err:
-                self.errors[ark] = str(err)
-                continue
-            if found:
-                records[ark] = next(iter(found.values()))
+            # A merged record is returned under its new ARK: ask again for it alone.
+            for ark in [ark for ark in arks if ark not in records and ark not in self.errors]:
+                try:
+                    found = self.request(template.format(relation="all", arks=ark), 1)
+                except SRUError as err:
+                    self.errors[ark] = str(err)
+                    continue
+                if found:
+                    records[ark] = next(iter(found.values()))
+        except requests.RequestException as err:
+            # still failing after the retries: keep what was fetched and stop asking the BnF
+            self.unavailable = str(err)
+            self.errors.update({ark: "catalogue BnF injoignable" for ark in arks
+                                if ark not in records and ark not in self.errors})
         return records
 
     def _fetch_batch(self, template, batch):

@@ -24,6 +24,7 @@ FIXTURES = {"ark:/12148/cb12083793k": "aut_cb12083793k", "ark:/12148/cb12230181h
 
 class FakeSRU:
     errors = {}
+    unavailable = None
 
     def fetch(self, arks, mode, advance=None):
         return {ark: load_record(FIXTURES[ark]) for ark in arks if ark in FIXTURES}
@@ -68,7 +69,7 @@ def test_run_fills_empty_cells_only(tmp_path, monkeypatch):
 
     report, _ = read_csv(tmp_path / "fiche_personne_a_verifier.csv")
     problems = dict(zip(report["Ligne"], report["Probleme"]))
-    assert problems == {"PERS3": "nom/titre différent", "PERS5": "notice introuvable"}
+    assert problems == {"PERS3": "nom/titre différent", "PERS5": "introuvable"}
     assert "Cellules remplies" in result.output
 
     assert (tmp_path / "fiche_personne.csv.bak").exists()

@@ -45,10 +45,10 @@ python run.py fiche_personne_enrich.csv PERS
 L'affichage comprend :
 - **un en-tête** : fichier, nombre de lignes, séparateur, GeoNames activé ou non ;
 - **deux barres de progression** : interrogation de la BnF, puis enrichissement des lignes ;
-- **un tableau des lignes à vérifier**, limité aux 20 premières : ARK hors catalogue BnF, même ARK sur plusieurs lignes, notice introuvable, nom ou titre différent de la notice. La liste complète est enregistrée à côté du fichier, dans `FICHIER_a_verifier.csv` ;
+- **un tableau des lignes à vérifier**, limité aux 20 premières : ARK hors catalogue BnF, ARK en double, notice introuvable, nom ou titre différent de la notice. La liste complète est enregistrée à côté du fichier, dans `FICHIER_a_verifier.csv` ;
 - **un résumé** : cellules remplies, ISNI complétés, lignes ignorées.
 
-Un Ctrl+C pendant l'enrichissement enregistre les lignes déjà traitées.
+Un Ctrl+C pendant l'enrichissement enregistre les lignes déjà traitées. Si le catalogue BnF ne répond plus (même après les nouvelles tentatives), l'outil arrête de l'interroger, utilise les notices déjà reçues et enregistre le fichier : il suffit de relancer plus tard.
 
 ## Fonctionnement
 

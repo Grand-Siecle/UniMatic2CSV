@@ -4,14 +4,13 @@ from pathlib import Path
 
 import click
 import pandas as pd
-import requests
 from rich import box
 from rich.panel import Panel
 from rich.progress import BarColumn, MofNCompleteColumn, Progress, TextColumn, TimeElapsedColumn
 from rich.table import Table
 from rich.text import Text
 
-from src.base import SRU, SRUError
+from src.base import SRU
 from src.book import Book
 from src.console import console
 from src.csvfile import read_csv, write_csv
@@ -65,12 +64,11 @@ def show_header(filename, df, fmt, objet, geonames_enabled):
 def show_issues(issues, report):
     table = Table(title=f"Lignes à vérifier ({len(issues)})", title_justify="left", title_style="bold yellow",
                   box=box.SIMPLE_HEAD)
-    table.add_column("Ligne", style="bold")
-    table.add_column("ARK", style="dim")
-    table.add_column("Problème", style="yellow")
-    table.add_column("Notice BnF / détail", no_wrap=True, overflow="ellipsis", max_width=50)
-    for issue in issues[:MAX_ISSUES_SHOWN]:
-        table.add_row(*(Text(str(value)) for value in issue))
+    table.add_column("Ligne", style="bold", no_wrap=True)
+    table.add_column("Problème", style="yellow", no_wrap=True)
+    table.add_column("ARK / notice BnF", no_wrap=True, overflow="ellipsis", max_width=max(20, console.width - 48))
+    for row, ark, problem, detail in issues[:MAX_ISSUES_SHOWN]:
+        table.add_row(Text(str(row)), problem, Text(f"{ark}  {detail}" if detail else str(ark)))
     if len(issues) > MAX_ISSUES_SHOWN:
         table.caption = f"… et {len(issues) - MAX_ISSUES_SHOWN} autres : liste complète dans {report}"
     console.print(table)
@@ -117,20 +115,20 @@ def run(filename: str, objet: str, header: int, output: str, no_check: bool):
     arks = df["ARK"].map(normalize_ark)
     issues = []  # (row, ARK, problem, detail)
     for index in df.index[df["ARK"].notna() & arks.isna()]:
-        issues.append((row_label(df, index, header), df.at[index, "ARK"], "ARK hors catalogue BnF", ""))
+        issues.append((row_label(df, index, header), df.at[index, "ARK"], "hors catalogue BnF", ""))
     duplicated = arks[arks.notna() & arks.duplicated(keep=False)]
     for ark, rows in duplicated.groupby(duplicated):
         labels = ", ".join(str(row_label(df, i, header)) for i in rows.index)
-        issues.append((labels, ark, "même ARK sur plusieurs lignes", ""))
+        issues.append((labels, ark, "ARK en double", ""))
 
     sru = SRU()
     unique_arks = list(dict.fromkeys(arks.dropna()))
-    try:
-        with progress() as bar:
-            task = bar.add_task("Catalogue BnF", total=len(unique_arks))
-            records = sru.fetch(unique_arks, objet, advance=lambda count: bar.advance(task, count))
-    except (requests.RequestException, SRUError) as err:
-        raise click.ClickException(f"Le catalogue BnF ne répond pas, rien n'a été écrit : {err}")
+    with progress() as bar:
+        task = bar.add_task("Catalogue BnF", total=len(unique_arks))
+        records = sru.fetch(unique_arks, objet, advance=lambda count: bar.advance(task, count))
+    if sru.unavailable:
+        console.print(Text(f"Le catalogue BnF ne répond plus ({sru.unavailable}) : les notices déjà reçues sont "
+                           "utilisées, relancez plus tard pour les autres.", style="yellow"))
 
     stats = {"filled": 0, "rows": 0, "no_ark": 0, "not_found": 0, "mismatch": 0, "isni": None}
     try:
@@ -141,7 +139,7 @@ def run(filename: str, objet: str, header: int, output: str, no_check: bool):
                     stats["no_ark"] += 1
                     continue
                 if ark not in records:
-                    issues.append((label, ark, "notice introuvable", sru.errors.get(ark, "")))
+                    issues.append((label, ark, "introuvable", sru.errors.get(ark, "")))
                     stats["not_found"] += 1
                     continue
 
