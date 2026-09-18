@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?><srw:searchRetrieveResponse xmlns:srw="http://www.loc.gov/zing/srw/" xmlns="http://catalogue.bnf.fr/namespaces/InterXMarc" xmlns:ixm="http://catalogue.bnf.fr/namespaces/InterXMarc" xmlns:mn="http://catalogue.bnf.fr/namespaces/motsnotices" xmlns:sd="http://www.loc.gov/zing/srw/diagnostic/">
+<srw:version>1.2</srw:version>
+<srw:echoedSearchRetrieveRequest>
+<srw:version>1.2</srw:version>
+<srw:query>aut.persistentid all "ark:/12148/cb12230181h"</srw:query>
+</srw:echoedSearchRetrieveRequest>
+<srw:numberOfRecords>1</srw:numberOfRecords>
+<srw:records>
+<srw:record>
+<srw:recordSchema>marcxchange</srw:recordSchema>
+<srw:recordPacking>xml</srw:recordPacking>
+<srw:recordData>
+<mxc:record xmlns:mxc="info:lc/xmlns/marcxchange-v2" format="UNIMARC" id="ark:/12148/cb12230181h" type="Authority">
+<mxc:leader>     cx  a22        45  </mxc:leader>
+<mxc:controlfield tag="001">FRBNF122301815</mxc:controlfield>
+<mxc:controlfield tag="003">http://catalogue.bnf.fr/ark:/12148/cb12230181h</mxc:controlfield>
+<mxc:controlfield tag="005">20110708</mxc:controlfield>
+<mxc:datafield tag="010" ind1=" " ind2=" ">
+<mxc:subfield code="a">0000000118738159</mxc:subfield>
+<mxc:subfield code="2">VIAF</mxc:subfield>
+<mxc:subfield code="d">20130725</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="039" ind1=" " ind2=" ">
+<mxc:subfield code="o">OPL</mxc:subfield>
+<mxc:subfield code="a">007907153</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="100" ind1=" " ind2=" ">
+<mxc:subfield code="a">19910922afrey50      ba0</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="101" ind1=" " ind2=" ">
+<mxc:subfield code="a">mul</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="102" ind1=" " ind2=" ">
+<mxc:subfield code="a">BE</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="103" ind1=" " ind2=" ">
+<mxc:subfield code="a"> 15860522  16580312 </mxc:subfield>
+<mxc:subfield code="b"> 1612? 1658?</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="105" ind1=" " ind2=" ">
+<mxc:subfield code="c">l</mxc:subfield>
+<mxc:subfield code="d">a</mxc:subfield>
+<mxc:subfield code="a">a</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="106" ind1=" " ind2=" ">
+<mxc:subfield code="a">1  </mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="120" ind1=" " ind2=" ">
+<mxc:subfield code="a">b</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="152" ind1=" " ind2=" ">
+<mxc:subfield code="c">2</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="200" ind1=" " ind2="|">
+<mxc:subfield code="7">ba0yba0y</mxc:subfield>
+<mxc:subfield code="8">fre   </mxc:subfield>
+<mxc:subfield code="9"> 1 </mxc:subfield>
+<mxc:subfield code="a">Aertssens</mxc:subfield>
+<mxc:subfield code="b">Hendrik</mxc:subfield>
+<mxc:subfield code="f">1586-1658</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="300" ind1="0" ind2=" ">
+<mxc:subfield code="a">Autre(s) graphie(s) : Aertsens ; Artsens. - Variante(s) de prénom : Henri ; Hendrik Gasparsz. - Imprimeur-libraire</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="341" ind1=" " ind2=" ">
+<mxc:subfield code="a">Anvers</mxc:subfield>
+<mxc:subfield code="b">1612?-1658?</mxc:subfield>
+<mxc:subfield code="c">(Rue dite) Cammerstraat</mxc:subfield>
+<mxc:subfield code="d">Au Lis blanc</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="354" ind1=" " ind2=" ">
+<mxc:subfield code="a">Lucem candor amat</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="354" ind1=" " ind2=" ">
+<mxc:subfield code="a">Ars nutrit orbem perpetim</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="354" ind1=" " ind2=" ">
+<mxc:subfield code="a">Belli arte togaeque</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="354" ind1=" " ind2=" ">
+<mxc:subfield code="a">Cavete</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="400" ind1=" " ind2="|">
+<mxc:subfield code="7">ba0yba0y</mxc:subfield>
+<mxc:subfield code="8">fre   </mxc:subfield>
+<mxc:subfield code="9">   </mxc:subfield>
+<mxc:subfield code="a">Aertssenius</mxc:subfield>
+<mxc:subfield code="b">Henricus</mxc:subfield>
+<mxc:subfield code="f">1586-1658</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="400" ind1=" " ind2="|">
+<mxc:subfield code="7">ba0yba0y</mxc:subfield>
+<mxc:subfield code="8">fre   </mxc:subfield>
+<mxc:subfield code="9">   </mxc:subfield>
+<mxc:subfield code="a">Arsen</mxc:subfield>
+<mxc:subfield code="b">Hendrik</mxc:subfield>
+<mxc:subfield code="f">1586-1658</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="400" ind1=" " ind2="|">
+<mxc:subfield code="7">ba0yba0y</mxc:subfield>
+<mxc:subfield code="8">fre   </mxc:subfield>
+<mxc:subfield code="9">   </mxc:subfield>
+<mxc:subfield code="a">Artsen</mxc:subfield>
+<mxc:subfield code="b">Hendrik</mxc:subfield>
+<mxc:subfield code="f">1586-1658</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="700" ind1=" " ind2="|">
+<mxc:subfield code="7">ba0yba0y</mxc:subfield>
+<mxc:subfield code="8">fre|||</mxc:subfield>
+<mxc:subfield code="9"> 0 </mxc:subfield>
+<mxc:subfield code="a">Aertssens</mxc:subfield>
+<mxc:subfield code="b">Hendrik</mxc:subfield>
+<mxc:subfield code="d">I</mxc:subfield>
+<mxc:subfield code="f">1586-1658</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="801" ind1=" " ind2=" ">
+<mxc:subfield code="a">FR</mxc:subfield>
+<mxc:subfield code="b">FR-751131015</mxc:subfield>
+<mxc:subfield code="c">20110708</mxc:subfield>
+</mxc:datafield>
+<mxc:datafield tag="810" ind1=" " ind2=" ">
+<mxc:subfield code="a">Van Havre</mxc:subfield>
+<mxc:subfield code="a">Olthoff</mxc:subfield>
+<mxc:subfield code="a">Delalain, Marques</mxc:subfield>
+<mxc:subfield code="a">Hist. du livre en Belgique : mêle Hendrik I et II</mxc:subfield>
+<mxc:subfield code="a">Soenen</mxc:subfield>
+</mxc:datafield>
+</mxc:record>      </srw:recordData>
+<srw:recordIdentifier>ark:/12148/cb12230181h</srw:recordIdentifier>
+<srw:recordPosition>1</srw:recordPosition>
+<srw:extraRecordData>
+<ixm:attr name="CreationDate">19911218</ixm:attr>
+<ixm:attr name="LastModificationDate">20171218</ixm:attr>
+<mn:score>7.512255</mn:score>
+</srw:extraRecordData>
+</srw:record>
+</srw:records>
+</srw:searchRetrieveResponse>

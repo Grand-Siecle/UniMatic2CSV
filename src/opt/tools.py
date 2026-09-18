@@ -1,59 +1,63 @@
 import re
-import click
-import requests
-import os
-from src.opt.variables import ARK
+import unicodedata
+from difflib import SequenceMatcher
+
+from src.opt.variables import ARK_BNF
 
 
-def check_ark(ark):
-    """Checks the validity of a ARK id with regex for a CLI argument"""
-
-    regex = ARK
-
-    try:
-        if re.match(regex, ark):
-            return ark
-        else:
-            raise click.BadParameter(f"Valeur invalide pour l'argument {ark}. La valeur ne correspond pas à un identifiant ARK")
-
-    except re.error as e:
-        raise click.BadParameter(f"Expression régulière invalide : {regex}")
-
-
-def get_geonames_id(location_name):
-
-    """
-    Obtient l'identifiant (ID) d'un lieu à partir de son nom en utilisant l'API Geonames.
-
-    Args:
-        location_name (str): Le nom du lieu.
-        username (str): Votre nom d'utilisateur Geonames (nécessaire pour l'authentification).
-
-    Returns:
-        int or None: L'identifiant (ID) du lieu, ou None si la requête échoue.
-    """
-    base_url = "http://api.geonames.org/searchJSON"
-    try:
-        username = os.environ['GEONAME_USERNAME']
-    except KeyError:
-        click.echo("Vous devez indiquer votre nom d'utilisateur Geoname au sein de la variable d'environnement [GEONAME_USERNAME]")
-        exit()
-
-    # Paramètres de la requête
-    params = {
-        'q': location_name,
-        'maxRows': 1,  # Vous pouvez ajuster cela en fonction de vos besoins
-        'username': username,  # Remplacez par votre nom d'utilisateur Geonames
-    }
-
-    try:
-        # Effectuer la requête
-        response = requests.get(base_url, params=params)
-        data = response.json()
-
-        # Extraire l'ID du premier résultat (si disponible)
-        geonames_id = data['geonames'][0]['geonameId'] if 'geonames' in data and data['geonames'] else None
-        return geonames_id
-
-    except requests.RequestException as e:
+def normalize_ark(value):
+    """Extract the BnF catalogue ARK from a cell (bare ARK or catalogue URL), None otherwise."""
+    if not isinstance(value, str):
         return None
+    match = re.search(ARK_BNF, value)
+    return match.group(0) if match else None
+
+
+def normalize_isni(value):
+    """Restore the 16 characters of an ISNI whose leading zeros were dropped by a spreadsheet."""
+    if not isinstance(value, str):
+        return value
+    compact = value.replace(" ", "").upper()
+    if re.fullmatch(r"\d{1,15}[\dX]", compact):
+        return compact.zfill(16)
+    return value
+
+
+def marc_date(value):
+    """Convert a UNIMARC coded date (YYYYMMDD, unknown parts blank or dotted) to YYYY/MM/DD.
+
+    " 15860522" -> "1586/05/22", "166505  " -> "1665/05", "16..    " -> "16.."
+    """
+    value = (value or "").strip()
+    year = value[0:4]
+    if not year:
+        return None
+    parts = [year]
+    if value[4:6].isdigit():
+        parts.append(value[4:6])
+        if value[6:8].isdigit():
+            parts.append(value[6:8])
+    return "/".join(parts)
+
+
+def _simplify(text):
+    """Lowercase, no accents, only letters and digits separated by spaces."""
+    text = unicodedata.normalize("NFKD", str(text))
+    text = "".join(c for c in text if not unicodedata.combining(c)).lower()
+    return " ".join(re.findall(r"[a-z0-9]+", text))
+
+
+def similarity(csv_value, bnf_value):
+    """Score between 0 and 1 telling how much a CSV value (name, short title) looks like the BnF one.
+
+    Returns 1 when there is nothing to compare.
+    """
+    a, b = _simplify(csv_value or ""), _simplify(bnf_value or "")
+    if not a or not b:
+        return 1.0
+    if min(len(a), len(b)) >= 3 and (a in b or b in a):
+        return 1.0
+    prefix = SequenceMatcher(None, a, b[:len(a)]).ratio()
+    words = [w for w in a.split() if len(w) > 3]
+    overlap = sum(w in b.split() for w in words) / len(words) if words else 0.0
+    return max(prefix, overlap)

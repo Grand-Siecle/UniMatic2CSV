@@ -4,105 +4,72 @@
 # Python class to parse and store data from the BNF's general catalogue.
 # -----------------------------------------------------------
 
-import numpy as np
-from lxml import etree
+import re
 from typing import Dict
-from datetime import datetime
 
-from src.base import SRU
-from src.opt.tools import get_geonames_id
+from src.base import NS, Notice
+from src.opt.variables import FORMATS, MULTI_SEP
 
 
-class Book(SRU):
+class Book(Notice):
+    """Bibliographic record."""
 
-    def __init__(self, ark):
-        super().__init__(ark)
-        self.root, self.perfect_match = self.request(mode='BOOK')
+    # CSV columns compared with the title of the record
+    CHECK_COLUMNS = ("Titre_abrege",)
+    # place column -> GeoNames id column
+    PLACES = {"Lieu_publication": "ID_Lieu_publication"}
 
-    def id_author(self) -> Dict:
-        fields = ["ISNI"]
+    def labels(self):
+        return self.values("200", "a")
 
-        data = {}
-        {data.setdefault(f, np.NAN) for f in fields}
-
-        ids_isni = self.root.findall('.//m:datafield[@tag="700"]', namespaces=self.NS)
-
-        # -- identifier (700 subfield "o") --
-        list_isni = []
-        for id_isni in ids_isni:
-            id_isni = id_isni.find('m:subfield[@code="o"]', namespaces=self.NS)
-            list_isni.append(id_isni.text.strip().replace('ISNI', ''))
-        if len(list_isni) > 0:
-            data["ISNI"] = ' | '.join(list_isni)
-        return data
+    def reproduction(self):
+        """True for a microform or facsimile record: its place and date are those of the reproduction."""
+        coded = self.value("100", "a") or ""
+        return coded[8:9] == "e" or any("microforme" in v.lower() for v in self.values("200", "b"))
 
     def get_title(self) -> Dict:
-        fields = ["Titre_long", "Format"]
-
-        data = {}
-        {data.setdefault(f, np.NAN) for f in fields}
-
-        title_element = self.root.find('.//m:datafield[@tag="200"]', namespaces=self.NS)
-
-        # -- identifier (700 subfield "o") --
-        has_title = title_element.find('m:subfield[@code="a"]', namespaces=self.NS) if title_element is not None else None
-
-        format_element = self.root.find('.//m:datafield[@tag="215"]', namespaces=self.NS)
-        has_format = format_element.find('m:subfield[@code="d"]', namespaces=self.NS) if format_element is not None else None
-        if has_title is not None:
-            data["Titre_long"] = has_title.text.strip()
-        if has_format is not None:
-            data["Format"] = has_format.text.strip()
-        return data
+        # -- title (200 subfield "a") and format (215 "d", sometimes written in 215 "a" or 210 "d") --
+        return {"Titre_long": self.value("200", "a"), "Format": self._format()}
 
     def get_publication(self) -> Dict:
-        fields = ["ID_Lieu_publication", "Lieu_publication", "Date_01"]
-
-        data = {}
-        {data.setdefault(f, np.NAN) for f in fields}
-
-        id_element = self.root.find('.//m:datafield[@tag="210"]', namespaces=self.NS)
-
-        # -- identifier (700 subfield "o") --
-        has_place = id_element.find('m:subfield[@code="a"]', namespaces=self.NS).text.strip() if id_element is not None else None
-        has_placeId = get_geonames_id(has_place)
-
-        has_date = id_element.find('m:subfield[@code="d"]', namespaces=self.NS).text.strip() if id_element is not None else None
-        if has_place is not None:
-            data["ID_Lieu_publication"] = has_placeId
-        if has_place is not None:
-            data["Lieu_publication"] = has_place
-        if has_date is not None:
-            try:
-                has_date = datetime.strptime(has_date, "%Y%m%d").strftime("%Y/%m/%d")
-                data["Date_01"] = has_date
-            except:
-                data["Date_01"] = has_date
-        return data
+        if self.reproduction():
+            return {"Lieu_publication": None, "Date_01": None}
+        # -- place: normalised form (620 "d") if any, else as printed (214 or 210 "a"), never "[S.l.]" --
+        places = self.values("620", "d") + self.values("214", "a") + self.values("210", "a")
+        place = next((p for p in places if not re.fullmatch(r"\[?\(?s\.\s?l\.?\)?\]?", p, flags=re.IGNORECASE)), None)
+        return {"Lieu_publication": place, "Date_01": self._date()}
 
     def get_matiere(self) -> Dict:
-        fields = ["Sujet", "Cote"]
+        # -- subjects (606): one heading "a -- x -- y -- z" per field --
+        headings = []
+        for field in self.record.iterfind('m:datafield[@tag="606"]', namespaces=NS):
+            parts = [subfield.text.strip() for subfield in field.iterfind("m:subfield", namespaces=NS)
+                     if subfield.get("code") in ("a", "x", "y", "z") and subfield.text and subfield.text.strip()]
+            if parts:
+                headings.append(" -- ".join(parts))
 
-        data = {}
-        {data.setdefault(f, np.NAN) for f in fields}
+        # -- shelfmark (930 "a"): digitised copies (NUMM-...) first, else the first copy --
+        cotes = self.values("930", "a")
+        digitised = [cote for cote in cotes if cote.startswith("NUMM-")]
+        cote = MULTI_SEP.join(digitised) if digitised else (cotes[0] if cotes else None)
 
-        ids_element = self.root.findall('.//m:datafield[@tag="606"]', namespaces=self.NS)
+        return {"Sujet": MULTI_SEP.join(headings) if headings else None, "Cote": cote}
 
-        # -- identifier (606 subfield "o") --
-        list_rameau = []
-        for id_element in ids_element:
-            for letter in ['a', 'x', 'y', 'z']:
-                try:
-                    label_rameau = id_element.find(f'm:subfield[@code="{letter}"]', namespaces=self.NS)
-                    list_rameau.append(label_rameau.text.strip())
-                except AttributeError:
-                    pass #Nonetype
-        if len(list_rameau) > 0:
-            data["Sujet"] = ' | '.join(list_rameau)
+    def to_dict(self) -> Dict:
+        return {**self.get_title(), **self.get_publication(), **self.get_matiere()}
 
-        # Cote
-        cote_element = self.root.find('.//m:datafield[@tag="930"]', namespaces=self.NS) # get only first ref
-        has_cote = cote_element.find('m:subfield[@code="a"]', namespaces=self.NS) if cote_element is not None else None
-        if has_cote is not None:
-            data["Cote"] = has_cote.text.strip()
-        return data
+    def _format(self):
+        for text in self.values("215", "d") + self.values("215", "a") + self.values("210", "d"):
+            match = re.search(r"\bin-?\s*(fol|plano|\d+)", text, flags=re.IGNORECASE)
+            if match and match.group(1).lower() in FORMATS:
+                return FORMATS[match.group(1).lower()]
+        return None  # e.g. "23 cm" or "35 mm" (microfilm): not a format of the CSV vocabulary
+
+    def _date(self):
+        # coded publication date (100 "a", positions 9-12) is cleaner than the printed one (210 "d")
+        coded = self.value("100", "a") or ""
+        if coded[9:13].strip():
+            return coded[9:13].strip()
+        printed = self.value("214", "d") or self.value("210", "d")
+        match = re.search(r"\d{4}", printed or "")
+        return match.group(0) if match else None  # e.g. "Imprimé ceste année"
